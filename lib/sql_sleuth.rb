@@ -18,7 +18,7 @@ class ActiveRecord::ConnectionAdapters::AbstractAdapter
         raise SqlSleuth::BacktraceGenerator
       rescue SqlSleuth::BacktraceGenerator => e
         entries = e.backtrace.map { |l| SqlSleuth::RELEVANT_ENTITIES_EXP.match(l) }.
-          compact.map { |l| l[1] }
+          compact.map { |m| m[1] }.compact
         sql += '-- ' + entries.join(',') if entries.length > 0
       end
     end
